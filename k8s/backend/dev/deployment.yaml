@@ -21,8 +21,7 @@ spec:
     spec:
       containers:
         - name: backend
-
-          image: 010741811189.dkr.ecr.us-east-1.amazonaws.com/backend:f4c0ad5656308c36d5f620ae18210f4a4ecc9655
+          image: 010741811189.dkr.ecr.us-east-1.amazonaws.com/backend:IMAGE_TAG
           imagePullPolicy: Always
 
           ports:
@@ -55,6 +54,13 @@ spec:
             limits:
               cpu: "500m"
               memory: "512Mi"
+
+          livenessProbe:
+            httpGet:
+              path: /health/raw
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
 
           readinessProbe:
             httpGet:
