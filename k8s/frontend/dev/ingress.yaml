@@ -3,23 +3,17 @@ kind: Ingress
 metadata:
   name: frontend
   namespace: default
-
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-
-    # must match backend
     alb.ingress.kubernetes.io/group.name: app-ingress
-
 spec:
   ingressClassName: alb
-
   rules:
   - http:
       paths:
       - path: /
         pathType: Prefix
-
         backend:
           service:
             name: frontend
