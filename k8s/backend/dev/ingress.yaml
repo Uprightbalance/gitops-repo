@@ -3,9 +3,13 @@ kind: Ingress
 metadata:
   name: backend
   namespace: default
+
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
+
+    # ensures both ingresses share same ALB
+    alb.ingress.kubernetes.io/group.name: app-ingress
 
 spec:
   ingressClassName: alb
@@ -13,10 +17,11 @@ spec:
   rules:
   - http:
       paths:
-      - path: /
+      - path: /api
         pathType: Prefix
+
         backend:
           service:
             name: backend
             port:
-              number: 80
+              number: 8000
