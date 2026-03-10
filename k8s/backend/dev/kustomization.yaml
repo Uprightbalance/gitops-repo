@@ -4,4 +4,4 @@ resources:
 
 images:
   - name: 010741811189.dkr.ecr.us-east-1.amazonaws.com/backend
-    newTag: dev
+    newTag: 76fc88f77b5ff37a835b3b0909fec9b941a0d893
