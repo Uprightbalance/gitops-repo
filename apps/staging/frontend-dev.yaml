@@ -11,11 +11,11 @@ spec:
   source:
     repoURL: https://github.com/Uprightbalance/gitops-repo.git
     targetRevision: main
-    path: k8s/frontend/dev
+    path: k8s/frontend/staging
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: staging
 
   syncPolicy:
     automated:

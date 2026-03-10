@@ -1,0 +1,7 @@
+resources:
+  - ../base
+  - ingress.yaml
+
+images:
+  - name: 010741811189.dkr.ecr.us-east-1.amazonaws.com/frontend
+    newTag: dev
