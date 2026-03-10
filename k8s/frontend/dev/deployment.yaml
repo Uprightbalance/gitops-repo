@@ -3,6 +3,7 @@ kind: Deployment
 
 metadata:
   name: frontend
+  namespace: dev
 
 spec:
   replicas: 2
@@ -20,5 +21,16 @@ spec:
       containers:
         - name: frontend
           image: 010741811189.dkr.ecr.us-east-1.amazonaws.com/frontend
+          imagePullPolicy: Always
+
           ports:
             - containerPort: 80
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+
+            limits:
+              cpu: "500m"
+              memory: "512Mi"

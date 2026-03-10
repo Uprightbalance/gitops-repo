@@ -3,6 +3,7 @@ kind: Service
 
 metadata:
   name: frontend
+  namespace: dev
 
 spec:
   selector:

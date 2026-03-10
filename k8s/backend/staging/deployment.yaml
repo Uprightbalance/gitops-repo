@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: staging
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: backend
+
+  template:
+    metadata:
+      labels:
+        app: backend
+
+    spec:
+      containers:
+        - name: backend
+          image: 010741811189.dkr.ecr.us-east-1.amazonaws.com/backend
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 8000
+
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: DATABASE_URL
+
+            - name: APP_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: APP_NAME
+
+            - name: ENVIRONMENT
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: ENVIRONMENT
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
+          livenessProbe:
+            httpGet:
+              path: /health/raw
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+          readinessProbe:
+            httpGet:
+              path: /health/raw
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 5

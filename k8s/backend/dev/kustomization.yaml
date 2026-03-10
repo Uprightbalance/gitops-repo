@@ -1,7 +1,12 @@
 resources:
-  - ../base
+  - deployment.yaml
+  - service.yaml
   - ingress.yaml
 
 images:
   - name: 010741811189.dkr.ecr.us-east-1.amazonaws.com/backend
+<<<<<<< HEAD
     newTag: fed3e2f67c1beeffd3b85faaafe7ff44315b0615
+=======
+    newTag: dev
+>>>>>>> 6a09d7a (deployment files fixx)
