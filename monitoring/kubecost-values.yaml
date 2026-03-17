@@ -1,0 +1,6 @@
+global:
+  clusterId: "dev-cluster"
+
+kubecostProductConfigs:
+  kubecostProduct: 
+    clusterId: "dev-cluster"
