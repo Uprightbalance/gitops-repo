@@ -19,8 +19,24 @@ All deployments are declarative and automated via ArgoCD, ensuring reproducible 
 │   └── staging
 │       ├── backend-staging.yaml
 │       └── frontend-staging.yaml
+├── backup
+│   ├── trust-policy-velero.json
+│   ├── velero-policy.json
+│   ├── velero-v1.17.1-linux-amd64
+│   │   ├── LICENSE
+│   │   └── examples
+│   │       ├── minio
+│   │       │   └── 00-minio-deployment.yaml
+│   │       └── nginx-app
+│   │           ├── README.md
+│   │           ├── base.yaml
+│   │           └── with-pv.yaml
+│   └── velero-v1.17.1-linux-amd64.tar.gz
 ├── images
-│   └── images
+│   ├── grafana-prod-monitoring.png
+│   ├── loki-logs.png
+│   ├── node-exporter-grafana.png
+│   └── running nodes.png
 ├── k8s
 │   ├── backend
 │   │   ├── dev
@@ -62,7 +78,11 @@ All deployments are declarative and automated via ArgoCD, ensuring reproducible 
 │   └── trust-policy-loki.json
 └── monitoring
     ├── grafana-ingress.yaml
-    └── high-cpu-alert.yaml
+    ├── high-cpu-alert.yaml
+    ├── kubecost-ingress.yaml
+    ├── kubecost-values.yaml
+    └── otel-values.yaml
+
 ```
 ---
 
@@ -120,6 +140,45 @@ Workflow:
 
 ---
 
+## Tracing
+
+- **Grafana Tempo** provides distributed tracing across services  
+- Enables request-level visibility across frontend and backend  
+
+---
+
+## Observability (OpenTelemetry)
+
+- **OpenTelemetry (OTel)** is used for application instrumentation  
+- Collects **metrics, logs, and traces**  
+
+### Features
+
+- Centralized telemetry pipeline via OTel Collector  
+- Automatic and manual instrumentation support  
+- Integration with:
+  - Tempo (traces)  
+  - Prometheus (metrics)  
+  - Loki (logs)  
+
+---
+
+## Backup & Disaster Recovery
+
+- **Velero** is used for Kubernetes backup and restore  
+- Supports backup of:
+  - Cluster resources  
+  - Persistent volumes (EBS via snapshots)
+    NOTE: All backups are saved to s3 bucket
+
+### Features
+
+- Scheduled backups  
+- On-demand backups  
+- Namespace or full cluster restore  
+
+---
+
 ## Namespaces & Environments
 
 | Environment | Namespace | Purpose |
@@ -136,7 +195,8 @@ Workflow:
 2. ArgoCD automatically synchronizes the environment namespace.  
 3. Monitored via Prometheus/Grafana dashboards.  
 4. Logs collected and aggregated via Loki.  
-
+5. Traces are visualized via Tempo  
+6. Backups are managed via Velero
 ---
 
 ## CI/CD Integration
