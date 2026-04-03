@@ -5,4 +5,4 @@ resources:
 
 images:
   - name: 010741811189.dkr.ecr.us-east-1.amazonaws.com/backend
-    newTag: prod
+    newTag: staging
