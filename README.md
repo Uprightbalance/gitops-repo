@@ -679,3 +679,31 @@ It combines:
 * environment promotion discipline
 
 into a workflow that is much closer to a real platform operations model than a basic Kubernetes manifests repository.
+
+```md
+## Related Repositories
+
+This project is split into **three repositories** to separate platform provisioning, runtime deployment state, and artifact promotion.
+
+- **Platform Repository**  
+  Provisions the AWS infrastructure foundation using Terraform, including VPC, EKS, IAM, and RDS.
+https://github.com/Uprightbalance/production-aws-cloud-native-app.git
+
+- **GitOps Repository**  
+  Manages Kubernetes workloads and operational components declaratively through ArgoCD, including monitoring, logging, tracing, and backup tooling.
+https://github.com/Uprightbalance/gitops-repo.git
+
+- **Image Promotion Repository**  
+  Controls image tag promotion across **DEV → STAGING → PROD**, ensuring the same tested artifact is promoted safely across environments.
+https://github.com/Uprightbalance/backend-frontend--DEV_TAG-IMAGE-promote-to-staging-prod-env.git
+
+### Why this structure was used
+
+This separation improves:
+
+- maintainability
+- deployment traceability
+- release safety
+- operational clarity
+- alignment with real-world DevOps / Platform Engineering practices
+```
