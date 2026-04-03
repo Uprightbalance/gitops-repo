@@ -5,4 +5,4 @@ resources:
 
 images:
   - name: 010741811189.dkr.ecr.us-east-1.amazonaws.com/frontend
-    newTag: fed3e2f67c1beeffd3b85faaafe7ff44315b0615
+    newTag: 90204315e3f041498413d0bf50fdf7c9577d9028
